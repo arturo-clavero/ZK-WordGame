@@ -19,15 +19,15 @@ export default function WalletConnect() {
   const handleWalletClose = () => setWalletMenuAnchor(null);
 
 const connectWallet = async () => {
+
   try {
     if (!window.ethereum) {
       alert("MetaMask not detected!");
       return;
     }
-    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
-
+ 
     const address = await signer.getAddress();
     setWalletConnected(true);
     setWalletAddress(address);
@@ -38,7 +38,10 @@ const connectWallet = async () => {
     }
 
     window.ethereum.on("accountsChanged", (accounts) => {
-      if (accounts.length > 0) {
+if (address == adminWalletAddress) {
+      return;
+    }      if (accounts.length > 0) {
+        console.log("changing accounts: ", accounts);
         setWalletAddress(accounts[0]);
         setWalletConnected(true);
       } else {
@@ -69,11 +72,24 @@ const switchWallet = async () => {
     if (!window.ethereum) return;
 
     const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-    if (accounts.length > 0) {
-      setWalletAddress(accounts[0]);
+    if (accounts.length > 1) {
+      let i;
+      for (i = 0; i < accounts.length; i++){
+          if (accounts[i] == walletAddress){
+            if (i + 1 < accounts.length) i+=1;
+            else i = 0;
+            break;
+          }
+                if (i == accounts.length -1){
+                  i = 0;
+                  break;
+                }
+
+      }
+      setWalletAddress(accounts[i]);
       handleWalletClose();
 
-      if (accounts[0] !== adminWalletAddress) {
+      if (accounts[i] !== adminWalletAddress) {
         setIsDemo(false);
       }
     }
@@ -107,6 +123,14 @@ const switchToDemo = () => {
             anchorEl={walletMenuAnchor}
             open={Boolean(walletMenuAnchor)}
             onClose={handleWalletClose}
+            anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top', 
+              horizontal: 'right', 
+            }}
           >
             <MenuItem onClick={disconnectWallet}>Disconnect</MenuItem>
             <MenuItem onClick={switchWallet}>Switch Account</MenuItem>

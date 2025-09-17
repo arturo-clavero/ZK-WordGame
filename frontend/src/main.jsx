@@ -6,9 +6,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 const theme = createTheme({
   palette: {
-    mode: 'light', // 'dark' is also supported
+    mode: 'light',
     primary: {
-      main: '#1976d2', // MUI default blue
+      main: '#1976d2',
     },
     secondary: {
       main: '#dc004e',

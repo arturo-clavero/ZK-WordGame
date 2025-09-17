@@ -5,8 +5,8 @@ export default function HideScrollbarsGlobal(){
     <GlobalStyles
       styles={{
         "*": {
-          scrollbarWidth: "none",    // Firefox
-          msOverflowStyle: "none",   // IE/Edge
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
         },
         "*::-webkit-scrollbar": {
           width: 0,
