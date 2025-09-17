@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Typography, Card, Box, LinearProgress } from "@mui/material";
 
 export default function QuizStats() {
@@ -36,7 +36,6 @@ export default function QuizStats() {
         </Typography>
       </Box>
 
-      {/* Difficulty */}
       <Box textAlign="center" flex={1}>
         <Typography variant="subtitle2" color="text.secondary">
           Difficulty

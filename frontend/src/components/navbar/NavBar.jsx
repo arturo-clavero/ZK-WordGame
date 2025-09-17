@@ -1,16 +1,15 @@
-import React from "react";
-import { Box, Typography, Button } from "@mui/material";
-import WalletConnect from "./utils/WalletConnect.jsx";
+import { Box, Typography,  } from "@mui/material";
+import WalletConnect from "./WalletConnect.jsx";
 
 export default function NavBar() {
   return (
     <Box
 
       sx={{
-       position: "fixed", // always on top
+       position: "fixed",
         top: 0,
         left: 0,
-        zIndex: 1300, // higher than other elements
+        zIndex: 1300,
         width: "100%",
         px: { xs: 2, sm: 6 },
         py: 2,
@@ -25,7 +24,6 @@ export default function NavBar() {
 
       }}
     >
-      {/* Logo / Title */}
       <Typography
         variant="h5"
         sx={{
@@ -41,10 +39,9 @@ export default function NavBar() {
           },
         }}
       >
-        ZK Word Game
+        ZK-WordGame
       </Typography>
 
-      {/* Wallet Connect */}
       <Box>
         <WalletConnect />
       </Box>

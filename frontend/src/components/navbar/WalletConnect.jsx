@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
@@ -35,7 +35,7 @@ export default function WalletConnect() {
             onClick={handleWalletClick}
             startIcon={<AccountBalanceWalletIcon sx={{ color: "#fff" }} />}
             sx={{
-              color: "#fff", // force white text
+              color: "#fff",
               textTransform: "none",
               fontWeight: 600,
               "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },

@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Box,
   Card,
@@ -9,13 +7,6 @@ import {
   TextField,
   Button,
   Grid,
-  Badge,
-  LinearProgress,
-  Menu,
-  MenuItem,
-  IconButton,
-  ThemeProvider,
-  createTheme,
 } from "@mui/material";
 
 export default function QuizCard() {
@@ -73,6 +64,28 @@ export default function QuizCard() {
               </Box>
             )}
           </Card>
+          <style>{`
+          .letters {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px 0;
+          }
+
+          .letter {
+            font-size: 3.8rem;
+            font-weight: 600;
+            font-family: "Nunito", sans-serif;
+            display: inline-block;
+            animation: wave 1.8s ease-in-out infinite;
+          }
+
+          @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+        `}</style>
         </Grid>
+        
     )
 }
