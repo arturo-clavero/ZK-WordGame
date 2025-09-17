@@ -3,7 +3,7 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { getContext } from "../utils/context.jsx";
 import { ethers } from "ethers";
-import {useState} from "react";
+import { useState, useRef } from "react";
 
 export default function WalletConnect() {
   const {
@@ -13,14 +13,14 @@ export default function WalletConnect() {
     setWalletConnected,
     walletAddress,
     setWalletAddress,
-    walletMenuAnchor,
-    setWalletMenuAnchor,
   } = getContext();
+
   const [tooltipText, setTooltipText] = useState("Copy Address");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const buttonRef = useRef(null);
 
-
-  const handleWalletClick = (event) => setWalletMenuAnchor(event.currentTarget);
-  const handleWalletClose = () => setWalletMenuAnchor(null);
+  const handleWalletClick = () => setMenuOpen(true);
+  const handleWalletClose = () => setMenuOpen(false);
 
   const shortAddress = (addr) => {
     if (!addr) return "";
@@ -28,15 +28,13 @@ export default function WalletConnect() {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
 
-
   const copyAddress = async () => {
-    if (walletAddress)
+    if (walletAddress) {
       await navigator.clipboard.writeText(walletAddress);
-    setTooltipText("Copied");
-    let time = 1500;
-    setTimeout(() => setTooltipText(""), time);
-    setTimeout(() => setTooltipText("Copy Address"), time + 200);
-  }
+      setTooltipText("Copied");
+      setTimeout(() => setTooltipText("Copy Address"), 1500);
+    }
+  };
 
   const connectWallet = async () => {
     try {
@@ -101,9 +99,13 @@ export default function WalletConnect() {
     setIsDemo(true);
   };
 
-  const WalletButton = ({ onClick, label, showCopy }) => (
-    <Box
+  /** Reusable wallet button (same style always) */
+  const WalletButton = ({ label, showCopy, onClick }) => (
+    <Button
+      ref={buttonRef}
       onClick={onClick}
+      disableRipple
+      startIcon={<AccountBalanceWalletIcon sx={{ color: "#fff", fontSize: 20 }} />}
       sx={{
         display: "inline-flex",
         alignItems: "center",
@@ -113,11 +115,10 @@ export default function WalletConnect() {
         fontSize: 14,
         px: 1.5,
         py: 0.5,
-        cursor: "pointer",
+        background: "transparent",
         "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
       }}
     >
-      <AccountBalanceWalletIcon sx={{ color: "#fff", mr: 1.5, fontSize: 20 }} />
       <Box>{label}</Box>
       {showCopy && (
         <Tooltip title={tooltipText}>
@@ -133,7 +134,7 @@ export default function WalletConnect() {
           </IconButton>
         </Tooltip>
       )}
-    </Box>
+    </Button>
   );
 
   return (
@@ -141,14 +142,13 @@ export default function WalletConnect() {
       {walletConnected ? (
         <>
           <WalletButton
-            onClick={handleWalletClick}
             label={shortAddress(walletAddress)}
-            showCopy={true}
+            showCopy
+            onClick={handleWalletClick}
           />
-
           <Menu
-            anchorEl={walletMenuAnchor}
-            open={Boolean(walletMenuAnchor)}
+            anchorEl={buttonRef.current}
+            open={menuOpen}
             onClose={handleWalletClose}
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             transformOrigin={{ vertical: "top", horizontal: "right" }}
@@ -159,7 +159,7 @@ export default function WalletConnect() {
           </Menu>
         </>
       ) : (
-        <WalletButton onClick={connectWallet} label="Connect Wallet" showCopy={false} />
+        <WalletButton label="Connect Wallet" showCopy={false} onClick={connectWallet} />
       )}
     </>
   );
