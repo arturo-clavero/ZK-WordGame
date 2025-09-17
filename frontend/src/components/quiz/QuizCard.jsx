@@ -1,4 +1,5 @@
-import { useState } from "react";
+import {getContext} from "../utils/context.jsx";
+
 import {
   Typography,
   Box,
@@ -10,9 +11,14 @@ import {
 } from "@mui/material";
 
 export default function QuizCard() {
-      const [answer, setAnswer] = useState("");
-      const [completed, setCompleted] = useState(false);
-      const [revealNFT, setRevealNFT] = useState(null);
+  const {
+    answer,
+    setAnswer,
+    completed,
+    setCompleted,
+    revealNFT,
+    setRevealNFT
+  } = getContext();
 
   const randomLetters = "QWERTY";
       const handleSubmit = () => {

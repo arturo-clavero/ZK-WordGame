@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { Typography, Card, Box, LinearProgress } from "@mui/material";
+import {getContext} from "../utils/context.jsx";
+
 
 export default function QuizStats() {
-  const [stats] = useState({ attempts: 12, accuracy: 83, difficulty: 70 });
+  const {stats} = getContext();
 
   return (
     <Card

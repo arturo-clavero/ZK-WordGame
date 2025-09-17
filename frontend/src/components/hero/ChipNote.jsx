@@ -1,6 +1,7 @@
 import {
   Chip,
 } from "@mui/material";
+import SecurityIcon from "@mui/icons-material/Security";
 
 export default function ChipNote({text}) {
     return (

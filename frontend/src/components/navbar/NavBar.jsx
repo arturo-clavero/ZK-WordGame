@@ -20,7 +20,7 @@ export default function NavBar() {
         boxShadow: "0 6px 24px rgba(0,0,0,0.15)",
         borderBottomLeftRadius: 16,
         borderBottomRightRadius: 16,
-                    bgcolor: "primary.main",
+        bgcolor: "primary.main",
 
       }}
     >

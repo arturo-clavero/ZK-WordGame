@@ -4,7 +4,6 @@ import {
   Button,
   Stack,
 } from "@mui/material";
-import SecurityIcon from "@mui/icons-material/Security";
 import NFTCarousel from "./NFTCarousel.jsx";
 import ChipNote from "./ChipNote.jsx";
 

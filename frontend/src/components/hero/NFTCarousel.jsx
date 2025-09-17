@@ -5,6 +5,7 @@ import {
   CardContent,
   Badge,
 } from "@mui/material";
+
 const sampleNFTs = [
   { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
   { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
@@ -13,6 +14,7 @@ const sampleNFTs = [
   { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
   { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Legendary" },
 ];
+
 export default function NFTCarousel() {
   return (
     <Box
