@@ -1,10 +1,4 @@
-import {
-  Typography,
-  Box,
-  Card,
-  CardContent,
-  Badge,
-} from "@mui/material";
+import { Typography, Box, Card, CardContent, Badge } from "@mui/material";
 
 const sampleNFTs = [
   { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
@@ -18,19 +12,19 @@ const sampleNFTs = [
 export default function NFTCarousel() {
   return (
     <Box
-      className="nft-carousel"
       sx={{
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "center",  // center NFTs
         gap: 6,
         marginTop: 4,
-        mx: "auto",
+        overflow: "hidden",       // hide overflowing NFTs
+        width: "100%",
         maxWidth: 1200,
+        mx: "auto",
       }}
     >
       {sampleNFTs.map((nft, i) => (
         <Badge
-          className="float"
           key={i}
           badgeContent={nft.rarity}
           color="secondary"
@@ -40,10 +34,14 @@ export default function NFTCarousel() {
             <img
               src={nft.img}
               alt={nft.name}
-              style={{ width: "100%", borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }}
+              style={{
+                width: "100%",
+                borderTopLeftRadius: "12px",
+                borderTopRightRadius: "12px",
+              }}
             />
             <CardContent>
-              <Typography variant="body2" align="center" justifyItems="center">
+              <Typography variant="body2" align="center">
                 {nft.name}
               </Typography>
             </CardContent>
@@ -61,12 +59,14 @@ export default function NFTCarousel() {
           box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
           transition: transform 0.3s, box-shadow 0.3s;
         }
-        .float {
-                            animation: floatNFTs 3s ease-in-out infinite alternate
-}
+
         .nft-card:hover {
           transform: scale(1.05);
           box-shadow: 0px 10px 24px rgba(0,0,0,0.4);
+        }
+
+        .float {
+          animation: floatNFTs 3s ease-in-out infinite alternate;
         }
 
         @keyframes floatNFTs {
