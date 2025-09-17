@@ -33,7 +33,7 @@ export default function QuizCard() {
       };
     return (
     <Grid container justifyContent="center" sx={{ mt: 6, mb: 6 }}>
-          <Card sx={{ width: 450, p: 3, textAlign: "center" }}>
+          <Card sx={{ width: 600, height: 600, p: 3, textAlign: "center" }}>
             {!completed ? (
               <>
                 <Typography variant="h5">Arrange the letters:</Typography>
