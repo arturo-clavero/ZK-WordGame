@@ -16,7 +16,7 @@ import "@fontsource/inter/600.css";
 const theme = createTheme({
   palette: {
     primary: { main: "#6a1b9a" }, // deep purple
-    secondary: { main: "#ff9800" }, // orange
+    secondary: { main: "#fca24eff" }, // orange
     background: { default: "#f9fafb" },
     text: {
       primary: "#1f2937", // dark neutral gray
@@ -26,24 +26,24 @@ const theme = createTheme({
   typography: {
     fontFamily: `"Inter", "Nunito", sans-serif`, // default for body + headings
     h1: {
-      fontSize: "3rem",
+      fontSize: "4rem",
       fontWeight: 700,
       letterSpacing: "-0.02em",
       lineHeight: 1.2,
     },
     h2: {
-      fontSize: "2.2rem",
+      fontSize: "2.8rem",
       fontWeight: 600,
       letterSpacing: "-0.01em",
       lineHeight: 1.3,
     },
     h3: {
-      fontSize: "1.5rem",
+      fontSize: "1.8rem",
       fontWeight: 600,
       lineHeight: 1.4,
     },
     body1: {
-      fontSize: "1.05rem",
+      fontSize: "1.35rem",
       lineHeight: 1.7,
       fontWeight: 400,
     },
@@ -94,21 +94,7 @@ export default function App() {
         <QuizCard />
 
         <style>{`
-          /* Gradient NavBar (subtle) */
-          .MuiAppBar-root {
-            background: linear-gradient(90deg, #6a1b9a, #7b1fa2, #8e24aa);
-            box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
-          }
-
-          .MuiToolbar-root {
-            font-family: "Inter", sans-serif;
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-          }
-
-        
-          /* letters animation (cleaner) */
+            /* letters animation (cleaner) */
           .letters {
             display: flex;
             justify-content: center;
@@ -117,7 +103,7 @@ export default function App() {
           }
 
           .letter {
-            font-size: 2.8rem;
+            font-size: 3.8rem;
             font-weight: 600;
             font-family: "Nunito", sans-serif;
             display: inline-block;

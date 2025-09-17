@@ -10,15 +10,18 @@ import NFTCarousel from "./NFTCarousel.jsx";
 
 export default function HeroSection() {
   return (
+    <>
     <Box
       sx={{
         position: "relative",
         textAlign: "center",
-        py: 6,
+        py: 15,
         bgcolor: "primary.main",
         color: "#fff",
       }}
     >
+          <Box sx ={{ py:4 }}></Box>
+
       <Typography variant="h1" sx={{ mb: 2 }}>
         Daily Puzzle & NFT Rewards!
       </Typography>
@@ -27,10 +30,9 @@ export default function HeroSection() {
         Solve puzzles, earn exclusive NFTs every day.
       </Typography>
 
-      {/* ✅ ZK Proof badges */}
       <Stack
         direction="row"
-        spacing={2}
+        spacing={3}
         justifyContent="center"
         sx={{ mb: 3 }}
       >
@@ -60,11 +62,22 @@ export default function HeroSection() {
         />
       </Stack>
 
-      <Button variant="contained" color="secondary" sx={{ mb: 4 }}>
+      <Button variant="contained" sx={{
+      mt: 2,
+    mb: 8,
+    backgroundColor: "#bd46b7ff",  // 👈 your custom color
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#e288e0", // 👈 slightly darker for hover
+    },}}>
         Start Quiz
       </Button>
 
       <NFTCarousel />
+
     </Box>
-  );
+
+  </>
+    );
+
 }

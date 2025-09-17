@@ -5,26 +5,30 @@ import {
   CardContent,
   Badge,
 } from "@mui/material";
-
 const sampleNFTs = [
-  { name: "NFT Alpha", img: "https://via.placeholder.com/150", rarity: "Rare" },
-  { name: "NFT Beta", img: "https://via.placeholder.com/150", rarity: "Epic" },
-  { name: "NFT Gamma", img: "https://via.placeholder.com/150", rarity: "Legendary" },
+  { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
+  { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
+  { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Legendary" },
+  { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
+  { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
+  { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Legendary" },
 ];
-
 export default function NFTCarousel() {
   return (
     <Box
       className="nft-carousel"
       sx={{
         display: "flex",
-        justifyContent: "center",
-        gap: 3,
+        justifyContent: "space-around",
+        gap: 6,
         marginTop: 4,
+        mx: "auto",
+        maxWidth: 1200,
       }}
     >
       {sampleNFTs.map((nft, i) => (
         <Badge
+          className="float"
           key={i}
           badgeContent={nft.rarity}
           color="secondary"
@@ -37,7 +41,7 @@ export default function NFTCarousel() {
               style={{ width: "100%", borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }}
             />
             <CardContent>
-              <Typography variant="body2" align="center">
+              <Typography variant="body2" align="center" justifyItems="center">
                 {nft.name}
               </Typography>
             </CardContent>
@@ -54,12 +58,13 @@ export default function NFTCarousel() {
           cursor: pointer;
           box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
           transition: transform 0.3s, box-shadow 0.3s;
-          animation: floatNFTs 3s ease-in-out infinite alternate;
         }
-
+        .float {
+                            animation: floatNFTs 3s ease-in-out infinite alternate
+}
         .nft-card:hover {
           transform: scale(1.05);
-          box-shadow: 0px 10px 24px rgba(0,0,0,0.3);
+          box-shadow: 0px 10px 24px rgba(0,0,0,0.4);
         }
 
         @keyframes floatNFTs {

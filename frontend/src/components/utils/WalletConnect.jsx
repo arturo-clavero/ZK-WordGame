@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Menu,
-  MenuItem,
-} from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 export default function WalletConnect() {
@@ -36,9 +32,14 @@ export default function WalletConnect() {
       {walletConnected ? (
         <>
           <Button
-            color="inherit"
             onClick={handleWalletClick}
-            startIcon={<AccountBalanceWalletIcon />}
+            startIcon={<AccountBalanceWalletIcon sx={{ color: "#fff" }} />}
+            sx={{
+              color: "#fff", // force white text
+              textTransform: "none",
+              fontWeight: 600,
+              "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
+            }}
           >
             {walletAddress}
           </Button>
@@ -53,9 +54,14 @@ export default function WalletConnect() {
         </>
       ) : (
         <Button
-          color="inherit"
           onClick={connectWallet}
-          startIcon={<AccountBalanceWalletIcon />}
+          startIcon={<AccountBalanceWalletIcon sx={{ color: "#fff" }} />}
+          sx={{
+            color: "#fff", // force white text
+            textTransform: "none",
+            fontWeight: 600,
+            "&:hover": { backgroundColor: "rgba(126, 3, 156, 0.88)" },
+          }}
         >
           Connect Wallet
         </Button>

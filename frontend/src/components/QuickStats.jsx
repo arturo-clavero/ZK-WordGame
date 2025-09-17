@@ -7,10 +7,10 @@ export default function QuizStats() {
   return (
     <Card
       sx={{
-        mt: 8,
+        mt: 4,
         p: 3,
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "center",
         alignItems: "center",
         borderRadius: 3,
         boxShadow: 3,
@@ -36,6 +36,7 @@ export default function QuizStats() {
         </Typography>
       </Box>
 
+      {/* Difficulty */}
       <Box textAlign="center" flex={1}>
         <Typography variant="subtitle2" color="text.secondary">
           Difficulty
