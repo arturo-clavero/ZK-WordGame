@@ -4,10 +4,10 @@ import { Typography, Box, Card, CardContent, Badge } from "@mui/material";
 const sampleNFTs = [
   { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
   { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
-  { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Legendary" },
+  { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Mini" },
   { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
   { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
-  { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Legendary" },
+  { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Mini" },
 ];
 
 export default function NFTCarousel() {

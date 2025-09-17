@@ -1,31 +1,28 @@
-import { Button, Menu, MenuItem, IconButton, Tooltip, Box } from "@mui/material";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import { Button, Menu, MenuItem, Box, Tooltip, IconButton } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { getContext } from "../utils/context.jsx";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import {getContext} from "../utils/context.jsx";
 import { ethers } from "ethers";
-import { useState, useRef } from "react";
+import {useState} from "react";
 
 export default function WalletConnect() {
-  const {
-    adminWalletAddress,
-    setIsDemo,
-    walletConnected,
-    setWalletConnected,
-    walletAddress,
-    setWalletAddress,
-  } = getContext();
+    const { 
+      adminWalletAddress, 
+      setIsDemo,
+      walletConnected, 
+      setWalletConnected,
+      walletAddress,
+      setWalletAddress,
+      walletMenuAnchor,
+      setWalletMenuAnchor 
+    } = getContext();
 
   const [tooltipText, setTooltipText] = useState("Copy Address");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const buttonRef = useRef(null);
 
-  const handleWalletClick = () => setMenuOpen(true);
-  const handleWalletClose = () => setMenuOpen(false);
-
-  const shortAddress = (addr) => {
+  const shortenAddress = (addr) => {
     if (!addr) return "";
     if (addr === adminWalletAddress) return "DEMO";
-    return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+    return `${addr.slice(0, 6)}...${addr.slice(-4)}`.toLowerCase();
   };
 
   const copyAddress = async () => {
@@ -36,130 +33,159 @@ export default function WalletConnect() {
     }
   };
 
-  const connectWallet = async () => {
-    try {
-      if (!window.ethereum) {
-        alert("MetaMask not detected!");
-        return;
-      }
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const address = await signer.getAddress();
+  const handleWalletClick = (event) => setWalletMenuAnchor(event.currentTarget);
+  const handleWalletClose = () => setWalletMenuAnchor(null);
 
-      setWalletConnected(true);
-      setWalletAddress(address);
-      handleWalletClose();
-      if (address !== adminWalletAddress) setIsDemo(false);
+const connectWallet = async () => {
 
-      window.ethereum.on("accountsChanged", (accounts) => {
-        if (accounts.length > 0) {
-          setWalletAddress(accounts[0]);
-          setWalletConnected(true);
-        } else {
-          disconnectWallet();
-        }
-      });
-
-      window.ethereum.on("chainChanged", () => window.location.reload());
-    } catch (error) {
-      console.error("Wallet connection failed:", error);
+  try {
+    if (!window.ethereum) {
+      alert("MetaMask not detected!");
+      return;
     }
-  };
-
-  const disconnectWallet = () => {
-    setWalletConnected(false);
-    setWalletAddress("");
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+ 
+    const address = await signer.getAddress();
+    setWalletConnected(true);
+    setWalletAddress(address);
     handleWalletClose();
-    if (walletAddress !== adminWalletAddress) setIsDemo(false);
-  };
 
-  const switchWallet = async () => {
-    try {
-      if (!window.ethereum) return;
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-      if (accounts.length > 1) {
-        let i;
-        for (i = 0; i < accounts.length; i++) {
-          if (accounts[i] === walletAddress) {
-            i = i + 1 < accounts.length ? i + 1 : 0;
+    if (address !== adminWalletAddress) {
+      setIsDemo(false);
+    }
+
+    window.ethereum.on("accountsChanged", (accounts) => {
+if (address == adminWalletAddress) {
+      return;
+    }      if (accounts.length > 0) {
+        console.log("changing accounts: ", accounts);
+        setWalletAddress(accounts[0]);
+        setWalletConnected(true);
+      } else {
+        disconnectWallet();
+      }
+    });
+
+    window.ethereum.on("chainChanged", () => {
+      window.location.reload();
+    });
+  } catch (error) {
+    console.error("Wallet connection failed:", error);
+  }
+};
+
+const disconnectWallet = () => {
+  setWalletConnected(false);
+  setWalletAddress("");
+  handleWalletClose();
+
+  if (walletAddress !== adminWalletAddress) {
+    setIsDemo(false);
+  }
+};
+
+const switchWallet = async () => {
+  try {
+    if (!window.ethereum) return;
+
+    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+    if (accounts.length > 1) {
+      let i;
+      for (i = 0; i < accounts.length; i++){
+          if (accounts[i] == walletAddress){
+            if (i + 1 < accounts.length) i+=1;
+            else i = 0;
             break;
           }
-        }
-        setWalletAddress(accounts[i]);
-        handleWalletClose();
-        if (accounts[i] !== adminWalletAddress) setIsDemo(false);
+                if (i == accounts.length -1){
+                  i = 0;
+                  break;
+                }
+
       }
-    } catch (err) {
-      console.error("Switch wallet failed:", err);
+      setWalletAddress(accounts[i]);
+      handleWalletClose();
+
+      if (accounts[i] !== adminWalletAddress) {
+        setIsDemo(false);
+      }
     }
-  };
+  } catch (err) {
+    console.error("Switch wallet failed:", err);
+  }
+};
 
-  const switchToDemo = () => {
-    setWalletAddress(adminWalletAddress);
-    setIsDemo(true);
-  };
-
-  /** Reusable wallet button (same style always) */
-  const WalletButton = ({ label, showCopy, onClick }) => (
-    <Button
-      ref={buttonRef}
-      onClick={onClick}
-      disableRipple
-      startIcon={<AccountBalanceWalletIcon sx={{ color: "#fff", fontSize: 20 }} />}
-      sx={{
-        display: "inline-flex",
-        alignItems: "center",
-        color: "#fff",
-        textTransform: "none",
-        fontWeight: 600,
-        fontSize: 14,
-        px: 1.5,
-        py: 0.5,
-        background: "transparent",
-        "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
-      }}
-    >
-      <Box>{label}</Box>
-      {showCopy && (
-        <Tooltip title={tooltipText}>
-          <IconButton
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation();
-              copyAddress();
-            }}
-            sx={{ ml: 0.5, p: 0.3, color: "#fff" }}
-          >
-            <ContentCopyIcon sx={{ fontSize: 14 }} />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Button>
-  );
+const switchToDemo = () => {
+  setWalletAddress(adminWalletAddress);
+  setIsDemo(true);
+};
 
   return (
     <>
       {walletConnected ? (
         <>
-          <WalletButton
-            label={shortAddress(walletAddress)}
-            showCopy
+        <Box sx={{
+              textTransform: "none",
+              fontWeight: 600,
+              "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
+            }}>
+          <Button
+            sx={{
+              color: "#fff",
+            }}
             onClick={handleWalletClick}
-          />
+            startIcon={<AccountBalanceWalletIcon sx={{ color: "#fff" }} />}
+            
+          >
+            {shortenAddress(walletAddress)}
+          </Button>
+          <Tooltip title={tooltipText}>
+            <IconButton
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                copyAddress();
+              }}
+              sx={{ ml: 0.5, p: 0.3, color: "#fff" }}
+            >
+              <ContentCopyIcon sx={{ fontSize: 14 }} />
+            </IconButton>
+        </Tooltip>
+          </Box>
           <Menu
-            anchorEl={buttonRef.current}
-            open={menuOpen}
+            anchorEl={walletMenuAnchor}
+            open={Boolean(walletMenuAnchor)}
             onClose={handleWalletClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            transformOrigin={{ vertical: "top", horizontal: "right" }}
+            anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top', 
+              horizontal: 'right', 
+            }}
           >
             <MenuItem onClick={disconnectWallet}>Disconnect</MenuItem>
             <MenuItem onClick={switchWallet}>Switch Account</MenuItem>
             <MenuItem onClick={switchToDemo}>Demo Admin</MenuItem>
+
           </Menu>
         </>
       ) : (
-        <WalletButton label="Connect Wallet" showCopy={false} onClick={connectWallet} />
+        <Button
+          onClick={connectWallet}
+          startIcon={<AccountBalanceWalletIcon sx={{ color: "#fff" }} />}
+           sx={{
+              color: "#fff",
+              textTransform: "none",
+              fontWeight: 600,
+              "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
+            }}
+        >
+          Connect Wallet
+        </Button>
+        
       )}
     </>
   );
