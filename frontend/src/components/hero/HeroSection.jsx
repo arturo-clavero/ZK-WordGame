@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import NFTCarousel from "./NFTCarousel.jsx";
 import ChipNote from "./ChipNote.jsx";
+import {Link} from "react-scroll";
 
 export default function HeroSection() {
   return (
@@ -40,7 +41,14 @@ export default function HeroSection() {
 
       </Stack>
 
-      <Button variant="contained" sx={{
+      <Button 
+        variant="contained" 
+        component={Link}
+        to="quizSection"
+        smooth={true}
+        duration={500}
+        offset={-80}
+        sx={{
             mt: 2,
             mb: 8,
             backgroundColor: "#bd46b7ff",

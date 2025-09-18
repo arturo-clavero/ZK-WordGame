@@ -10,7 +10,7 @@ export default function ChipNote({text}) {
           label={text}
           sx={{
             bgcolor: "rgba(222, 116, 255, 0.15)",
-            // color: "#fff",
+            color: "#fff",
             fontWeight: 500,
             "& .MuiChip-icon": {
                 color: "#ff9cfaff",

@@ -1,8 +1,6 @@
 import {getContext} from "../utils/context.jsx";
-import {useState} from "react";
 import useHandleSubmit from "./submitHook.jsx";
-import ChipNote from "../hero/ChipNote.jsx";
-
+import {Element} from "react-scroll";
 import {
   Typography,
   Box,
@@ -26,30 +24,9 @@ export default function QuizCard() {
   } = getContext();
   const randomLetters = "QWERTYXVEINKLQRT";
   const handleSubmit = useHandleSubmit();
-  // const handleSubmit = () => {
-  //   console.log("submited: ", answer);
-  //   if (answer.toUpperCase() === "A") {
-  //     let time1 = 5000;
-  //     let time2 = 3000;
-  //     let time3 = 1500;
-  //     time2 += time1;
-  //     time3 += time2;
-  //     setState("generatingProofs");
-  //     setTimeout(()=>setState("proovingProofs"), time1);
-  //     // setKYCproved();
-  //     // setSignatureProved();
-  //     // setAnswerProved();
-  //     console.log("answer correct...");
-  //     setTimeout(()=>setCompleted(true), time2);
-  //     setTimeout(()=>setRevealNFT(sampleNFTs[Math.floor(Math.random() * sampleNFTs.length)]), time2);
-
-  //     // setCompleted(true);
-  //     // setRevealNFT(sampleNFTs[Math.floor(Math.random() * sampleNFTs.length)]);
-  //   }
-  //   setAnswer("");
-  // };
 
     return (
+      <Element name="quizSection">
   <Grid container justifyContent="center" sx={{ mt: 6, mb: 6 }}>
     <Card
       sx={{
@@ -63,7 +40,6 @@ export default function QuizCard() {
         textAlign: "center",
       }}
     >
-      {!completed ? (
         <>
           <Typography variant="h5">Find the word to win an NFT!</Typography>
 
@@ -82,7 +58,7 @@ export default function QuizCard() {
             onChange={(e) => setAnswer(e.target.value)}
           />
 
-          {state === "" ? (
+          {state === "" ? ( 
             <Button
               variant="contained"
               color="primary"
@@ -92,57 +68,11 @@ export default function QuizCard() {
               Submit
             </Button>
           ) : (
-            <>
               <Button variant="contained" color="primary" sx={{ mt: 2 }} disabled>
                 Loading ...
               </Button>
-
-              <Box
-                sx={{
-                  mt: 2,
-                  minHeight: 100,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-evenly",
-                  textAlign: "left",
-                }}
-              >
-                {state === "generatingProofs" && (
-                  <>
-                    <ChipNote text="Generating Proof of Humanity" />
-                    <ChipNote text="Generating Proof of Correct Solution" />
-                  </>
-                )}
-
-                {state === "proovingProofs" && (
-                  <>
-                    <ChipNote text="Prooving Proof of Humanity" />
-                    <ChipNote text="Prooving Proof of Correct Solution" />
-                  </>
-                )}
-              </Box>
-            </>
           )}
         </>
-      ) : (
-        <Box>
-          <Typography variant="h3" sx={{ my: 2, color: "success.main" }}>
-            You won an NFT!
-          </Typography>
-
-          {revealNFT && (
-            <Card sx={{ mt: 2 }}>
-              <img src={revealNFT.img} alt={revealNFT.name} style={{ width: "100%" }} />
-              <CardContent>
-                <Typography variant="body1">{revealNFT.name}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {revealNFT.rarity}
-                </Typography>
-              </CardContent>
-            </Card>
-          )}
-        </Box>
-      )}
     </Card>
 
     <style>{`
@@ -170,5 +100,6 @@ export default function QuizCard() {
       }
     `}</style>
   </Grid>
+  </Element>
 );
 }
