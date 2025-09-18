@@ -20,6 +20,7 @@ export function ContextProvider({ children }) {
     { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
     { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Mini" },
   ];
+  const [state, setState] = useState("");
   return (
     <AppContext.Provider value={{
       adminWalletAddress,
@@ -41,7 +42,10 @@ export function ContextProvider({ children }) {
       setRevealNFT,
 
       stats,
-      sampleNFTs
+      sampleNFTs,
+
+      state,
+      setState,
 
     }}>
     {children}

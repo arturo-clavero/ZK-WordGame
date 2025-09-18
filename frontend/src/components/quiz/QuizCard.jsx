@@ -1,5 +1,6 @@
 import {getContext} from "../utils/context.jsx";
 import {useState} from "react";
+import useHandleSubmit from "./submitHook.jsx";
 import ChipNote from "../hero/ChipNote.jsx";
 
 import {
@@ -20,32 +21,33 @@ export default function QuizCard() {
     setCompleted,
     revealNFT,
     setRevealNFT,
-    sampleNFTs
+    sampleNFTs,
+    state
   } = getContext();
-  const [state, setState] = useState("");
   const randomLetters = "QWERTYXVEINKLQRT";
-  const handleSubmit = () => {
-    console.log("submited: ", answer);
-    if (answer.toUpperCase() === "A") {
-      let time1 = 5000;
-      let time2 = 3000;
-      let time3 = 1500;
-      time2 += time1;
-      time3 += time2;
-      setState("generatingProofs");
-      setTimeout(()=>setState("proovingProofs"), time1);
-      // setKYCproved();
-      // setSignatureProved();
-      // setAnswerProved();
-      console.log("answer correct...");
-      setTimeout(()=>setCompleted(true), time2);
-      setTimeout(()=>setRevealNFT(sampleNFTs[Math.floor(Math.random() * sampleNFTs.length)]), time2);
+  const handleSubmit = useHandleSubmit();
+  // const handleSubmit = () => {
+  //   console.log("submited: ", answer);
+  //   if (answer.toUpperCase() === "A") {
+  //     let time1 = 5000;
+  //     let time2 = 3000;
+  //     let time3 = 1500;
+  //     time2 += time1;
+  //     time3 += time2;
+  //     setState("generatingProofs");
+  //     setTimeout(()=>setState("proovingProofs"), time1);
+  //     // setKYCproved();
+  //     // setSignatureProved();
+  //     // setAnswerProved();
+  //     console.log("answer correct...");
+  //     setTimeout(()=>setCompleted(true), time2);
+  //     setTimeout(()=>setRevealNFT(sampleNFTs[Math.floor(Math.random() * sampleNFTs.length)]), time2);
 
-      // setCompleted(true);
-      // setRevealNFT(sampleNFTs[Math.floor(Math.random() * sampleNFTs.length)]);
-    }
-    setAnswer("");
-  };
+  //     // setCompleted(true);
+  //     // setRevealNFT(sampleNFTs[Math.floor(Math.random() * sampleNFTs.length)]);
+  //   }
+  //   setAnswer("");
+  // };
 
     return (
   <Grid container justifyContent="center" sx={{ mt: 6, mb: 6 }}>
