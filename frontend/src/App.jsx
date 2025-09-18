@@ -13,6 +13,7 @@ import QuickStats from "./components/quiz/QuickStats.jsx";
 import QuizCard from "./components/quiz/QuizCard.jsx";
 import ProgressCard from "./components/quiz/ProgressCard.jsx";
 import RevealNFTCard from "./components/quiz/RevealNFTCard.jsx";
+import Footer from "./components/footer/footer.jsx";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/600.css";
 
@@ -30,6 +31,7 @@ export default function App() {
           <QuizCard />
           <ProgressCard />
           <RevealNFTCard />
+          <Footer />
         </Box>
       </ContextProvider>
     </ThemeProvider>

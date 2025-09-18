@@ -68,7 +68,7 @@ export default function NFTCarousel() {
       <style>{`
         .nft-card {
           width: 160px;
-          height: 220px;
+          height: 215px;
           border-radius: 12px;
           overflow: hidden;
           cursor: pointer;

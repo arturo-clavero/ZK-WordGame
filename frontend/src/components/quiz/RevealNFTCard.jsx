@@ -14,17 +14,21 @@ export default function RevealNFTCard() {
   const {
     answer,
     setAnswer,
-    completed,
-    setCompleted,
     revealNFT,
     setRevealNFT,
     sampleNFTs,
-    state
+    setState,
+    state,
+    isDemo
   } = getContext();
 
+const retry = ()=>{
+    setState("");
+    //todo new quiz!
+}
     return (
         <Element name="revealNFTSection">
-            {completed === false ? (<></>) : (
+            {state === "completed" ? (
                 <Grid container justifyContent="center" sx={{ mt: 6, mb: 6 }}>
                     <Card
                     sx={{
@@ -38,12 +42,58 @@ export default function RevealNFTCard() {
                         textAlign: "center",
                     }}
                     >
-                        <>
-                        <Typography variant="h5">NFT</Typography>
-                        </>
+                        <Typography variant="h3" sx={{ my: 1, color: "success.main" }}>
+                            Congratulations!
+                        </Typography>
+                        <Typography variant="h6" sx={{ mb: 4 }}>
+                            Your answer was correct, you won this <strong>{revealNFT.rarity.toLowerCase()}</strong> NFT!
+                        </Typography>
+
+                        {revealNFT && (
+                            <Card className="nft-card-reveal" sx={{mb: 4}}>
+                                <img
+                                src={revealNFT.img}
+                                alt={revealNFT.name}
+                                style={{
+                                    width: "100%",
+                                    borderTopLeftRadius: "12px",
+                                    borderTopRightRadius: "12px",
+                                }}
+                                />
+                                <CardContent>
+                                <Typography variant="h6" align="center">
+                                    {revealNFT.name}
+                                </Typography>
+                                </CardContent>
+                            </Card>
+                        )}
+                    {isDemo === true ? (
+                        <Button variant="contained" color="primary" sx={{ 
+                            mt:2, 
+                            mb:1,
+                        }} onClick={(retry)}>
+                        New Puzzle
+                        </Button>
+                    ) : (<></>)
+                    }
                     </Card>
+                    <style>
+                    {`
+                        .nft-card-reveal {
+                            width: 350px;
+                            height: 430px;
+                            border-radius: 12px;
+                            overflow: hidden;
+                            cursor: pointer;
+                            box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
+                            transition: transform 0.3s, box-shadow 0.3s;
+                        }
+                        // TODO : card does a pop up 
+                    `}
+                    
+                    </style>
                 </Grid>
-            )}
+            ) : <></>}
         </Element>
     );
 }

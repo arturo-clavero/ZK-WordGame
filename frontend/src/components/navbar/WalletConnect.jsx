@@ -14,7 +14,8 @@ export default function WalletConnect() {
       walletAddress,
       setWalletAddress,
       walletMenuAnchor,
-      setWalletMenuAnchor 
+      setWalletMenuAnchor,
+      setState
     } = getContext();
 
   const [tooltipText, setTooltipText] = useState("Copy Address");
@@ -37,7 +38,7 @@ export default function WalletConnect() {
   const handleWalletClose = () => setWalletMenuAnchor(null);
 
 const connectWallet = async () => {
-
+    setState("");
   try {
     if (!window.ethereum) {
       alert("MetaMask not detected!");
@@ -79,6 +80,7 @@ const disconnectWallet = () => {
   setWalletConnected(false);
   setWalletAddress("");
   handleWalletClose();
+  setState("");
 
   if (walletAddress !== adminWalletAddress) {
     setIsDemo(false);
@@ -106,7 +108,7 @@ const switchWallet = async () => {
       }
       setWalletAddress(accounts[i]);
       handleWalletClose();
-
+      setState("");
       if (accounts[i] !== adminWalletAddress) {
         setIsDemo(false);
       }
@@ -118,6 +120,7 @@ const switchWallet = async () => {
 
 const switchToDemo = () => {
   setWalletAddress(adminWalletAddress);
+  // setState("");
   setIsDemo(true);
 };
 

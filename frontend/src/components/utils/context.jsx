@@ -21,6 +21,12 @@ export function ContextProvider({ children }) {
     { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Mini" },
   ];
   const [state, setState] = useState("");
+  const [proofStatus, setProofStatus] = useState({
+      poh: "idle",
+      answer: "idle",
+      signature: "idle",
+      verified: "idle",
+  });
   return (
     <AppContext.Provider value={{
       adminWalletAddress,
@@ -46,6 +52,9 @@ export function ContextProvider({ children }) {
 
       state,
       setState,
+
+      proofStatus,
+      setProofStatus,
 
     }}>
     {children}

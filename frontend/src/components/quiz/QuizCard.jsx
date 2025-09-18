@@ -15,8 +15,6 @@ export default function QuizCard() {
   const {
     answer,
     setAnswer,
-    completed,
-    setCompleted,
     revealNFT,
     setRevealNFT,
     sampleNFTs,
@@ -59,19 +57,25 @@ export default function QuizCard() {
           />
 
           {state === "" ? ( 
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ mt: 2 }}
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
-          ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ mt: 2 }}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            ) : state === "completed" ? (
               <Button variant="contained" color="primary" sx={{ mt: 2 }} disabled>
+                Completed
+              </Button>
+            )
+          : (
+            <Button variant="contained" color="primary" sx={{ mt: 2 }} disabled>
                 Loading ...
               </Button>
-          )}
+          )
+          }
         </>
     </Card>
 
