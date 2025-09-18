@@ -13,13 +13,24 @@ export function ContextProvider({ children }) {
   const [stats] = useState({ attempts: 12, accuracy: 83, difficulty: 70 });
   const adminWalletAddress = "TODO";
   const sampleNFTs = [
-    { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
-    { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
-    { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Mini" },
-    { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
-    { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
-    { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Mini" },
+
+
+{ name: "NFT Boss", img: "/nfts/1boss.png", rarity: "Elite" },
+{ name: "NFT Runner", img: "/nfts/1game.png", rarity: "Myth" },
+{ name: "NFT Alpha", img: "/nfts/1eye.png", rarity: "Epic" },
+{ name: "NFT Gamma", img: "/nfts/1pipe.png", rarity: "Rare" },
+{ name: "NFT Beta", img: "/nfts/1tongue.png", rarity: "Basic" },
+{ name: "NFT Fierce", img: "/nfts/1fire.png", rarity: "Hero" },
+
+
   ];
+  //  { name: "NFT Gamma", img: "/nfts/alpha.png", rarity: "Mini" },
+  //   { name: "NFT Beta", img: "/nfts/rain.png", rarity: "Epic" },
+  //   { name: "NFT Alpha", img: "/nfts/beta.png", rarity: "Rare" },
+  //     { name: "NFT Gamma", img: "/nfts/try5.png", rarity: "Mini" },
+  //     { name: "NFT Gamma", img: "/nfts/try3.png", rarity: "Mini" },
+  //   { name: "NFT Alpha", img: "/nfts/try1.png", rarity: "Rare" },
+
   const [state, setState] = useState("");
   const [proofStatus, setProofStatus] = useState({
       poh: "idle",
