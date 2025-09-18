@@ -139,7 +139,6 @@ const switchToDemo = () => {
             
           >
             {shortenAddress(walletAddress)}
-          </Button>
           <Tooltip title={tooltipText}>
             <IconButton
               size="small"
@@ -152,6 +151,8 @@ const switchToDemo = () => {
               <ContentCopyIcon sx={{ fontSize: 14 }} />
             </IconButton>
         </Tooltip>
+                  </Button> 
+{/* close this button at top before tooltip to get rid of the button insde button error */}
           </Box>
           <Menu
             anchorEl={walletMenuAnchor}
@@ -168,7 +169,7 @@ const switchToDemo = () => {
           >
             <MenuItem onClick={disconnectWallet}>Disconnect</MenuItem>
             <MenuItem onClick={switchWallet}>Switch Account</MenuItem>
-            <MenuItem onClick={switchToDemo}>Demo Admin</MenuItem>
+            <MenuItem onClick={switchToDemo}>Demo </MenuItem>
 
           </Menu>
         </>

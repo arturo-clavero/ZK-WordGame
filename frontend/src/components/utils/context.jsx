@@ -12,6 +12,14 @@ export function ContextProvider({ children }) {
   const [revealNFT, setRevealNFT] = useState(null);
   const [stats] = useState({ attempts: 12, accuracy: 83, difficulty: 70 });
   const adminWalletAddress = "TODO";
+  const sampleNFTs = [
+    { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
+    { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
+    { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Mini" },
+    { name: "NFT Alpha", img: "/nfts/alpha.png", rarity: "Rare" },
+    { name: "NFT Beta", img: "/nfts/beta.png", rarity: "Epic" },
+    { name: "NFT Gamma", img: "/nfts/gamma.png", rarity: "Mini" },
+  ];
   return (
     <AppContext.Provider value={{
       adminWalletAddress,
@@ -32,7 +40,8 @@ export function ContextProvider({ children }) {
       revealNFT,
       setRevealNFT,
 
-      stats
+      stats,
+      sampleNFTs
 
     }}>
     {children}
